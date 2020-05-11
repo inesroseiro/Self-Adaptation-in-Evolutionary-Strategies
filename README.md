@@ -5,7 +5,7 @@ It seems that changing the parameters of an evolutionary algorithm during a run 
 
 #### 2. Goals
 Your work will involve the comparison of two algorithms. One, with a representation that includes the values of the standard deviations of a normal distribution that we use to mutate each gene; another, with a normal rep- resentation. The benchmark problems to use are those describing functions whose optimum we want to find.
-For each version of the algorithm, and each benchmark problem, do thirty runs. Store quality measures, like the performance at the end of the run and the moment the best result was obtained. Do a statistical anal- ysis of those measures and draw your conclusions.
+For each version of the algorithm, and each benchmark problem, do thirty runs. Store quality measures, like the performance at the end of the run and the moment the best result was obtained. Do a statistical analysis of those measures and draw your conclusions.
 
 Work proposed by the Evolution Computation course,
 Msc in Intelligent Systems, University of Coimbra
