@@ -1,4 +1,4 @@
-##### Self-Adaptation-in-Evolutionary-Strategies
+### Self-Adaptation-in-Evolutionary-Strategies
 
 #### 1. Brief Description
 It seems that changing the parameters of an evolutionary algorithm during a run improves the results obtained. For example, the size of the population or the probabilities of the variation operators. We may define ourselves how this happens during the run. But it is a better idea to let evolution decide the best values to use at each moment. This is what we are going to study in the context of the so-called evolutive strategies.
