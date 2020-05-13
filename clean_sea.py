@@ -156,7 +156,7 @@ def evaluate(indiv):
 # ------------------------- SIMPLE EA -------------------------------------------------
 
 # Simple [Binary] Evolutionary Algorithm		
-def sea(numb_generations,size_pop, size_cromo, prob_mut,prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func):
+def sea(numb_generations,size_pop, size_cromo, prob_mut,prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func,test_id):
     # inicialize population: indiv = (cromo,fit)
     populacao = gera_pop(size_pop,size_cromo)
     # evaluate population
@@ -243,11 +243,11 @@ def run(seeds,numb_runs,numb_generations,size_pop, size_cromo, prob_mut, prob_cr
     average_best_gen = sum(best_generations)/len(best_generations)
     return boa,aver_gener, average_best_gen
     
-def run_for_file (seeds,filename,numb_runs,numb_generations,size_pop, size_cromo, prob_mut, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func):
-    with open(filename,'w') as f_out:
+def run_for_file (seeds,filename,numb_runs,numb_generations,size_pop, size_cromo, prob_mut, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func,test_id):
+    with open(filename,'a') as f_out:
         for i in range(numb_runs):
             seed(seeds[i])
-            best = sea(numb_generations,size_pop,size_cromo, prob_mut,prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
-            f_out.write(str(best[1])+'\n')
+            best = sea(numb_generations,size_pop,size_cromo, prob_mut,prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func,test_id)
+            f_out.write(str(best[1])+','+ test_id +'\n')
 
 

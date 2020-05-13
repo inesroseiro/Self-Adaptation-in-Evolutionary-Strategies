@@ -1,0 +1,4 @@
+correlation,max_value,amplitude,evalutation_func,number_runs,number_of_generations,pop_size,number_of_items,prob_mutation,prob_crossover,tournament_size,type_cross,type_mutation,elite_percentage,test_id
+uncorrelated,10,3,evaluate_zero,10,10,10,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05,1
+weak,10,3,evaluate_zero,10,10,10,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05,2
+strong,10,3,evaluate_zero,10,10,10,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05,3

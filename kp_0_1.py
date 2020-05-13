@@ -9,7 +9,43 @@ import copy
 import operator
 import math
 from utils import *
+import csv
 
+# --------- Read from csv and assign to the variables -----------------
+def read_test_file(test_file):    
+    test_data = []
+    with open(test_file) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+            if line_count == 0:
+                line_count += 1
+            else:
+                #print(len(row))
+                correlation = row[0]
+                max_value = int(row[1])
+                amplitude = int(row[2])
+                evaluation_func = row[3]
+                numb_runs = int(row[4])
+                number_of_generations = int(row[5])
+                pop_size = int(row[6])
+                number_of_items = int(row[7])
+                prob_mutation = float(row[8])
+                prob_crossover = float(row[9])
+                tournament_size = int(row[10])
+                type_crossover = row[11]
+                type_mutation = row[12]
+                elite_percentage = float(row[13])
+                test_id = int(row[14])
+
+
+                aux = [correlation,max_value,amplitude,evaluation_func,numb_runs,number_of_generations,pop_size,number_of_items,prob_mutation,prob_crossover,tournament_size,type_crossover,type_mutation,elite_percentage,test_id]
+
+                #problem = generate_uncor(number_of_items,10)
+                test_data.append(aux)
+
+                line_count += 1
+    return test_data
 
 # ---------  Evaluation -----------------
 def merit(problem, eval_func):
@@ -21,7 +57,6 @@ def merit(problem, eval_func):
         quali = eval_func(phenotype(indiv))
         return quali
     return fitness
-
 
 def phenotype(indiv):
     """from a binary string to a list of [id,weight,value]."""
@@ -66,6 +101,7 @@ def evaluate_quadratic(feno):
         rho = max([v/w for i,w,v in feno])
         quality -=  (rho * (total_weight - capacity))**2
     return quality
+
 
 # ------------ Data Sets -----------------------
 def generate_uncor(size_items,max_value):
@@ -153,36 +189,70 @@ def get_value(indiv,problem):
 
 
 if __name__ == '__main__':
-    number_of_generations = 10
-    number_of_items = 20
-    pop_size = 10
-    prob_mutation = 0.05
-    prob_crossover = 0.8
-    tournament_size = 3
+
     seeds = [2741, 8417, 5530, 4001, 1074, 828, 3878, 1652, 800, 1471, 3092, 2848, 6462, 7056, 7047, 4256, 4037, 6854, 918, 4042, 4333, 9051, 9126, 4210, 9385, 9860, 7732, 9063, 2044, 9998]
-    numb_runs = 10
-    elite_percentage = 0.02
-
-    problem = generate_uncor(number_of_items,10)
-    #problem = generate_weak_cor(number_of_items,10, 5)
-    #problem = generate_strong_cor(number_of_items,10, 5)
-
     path = '/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/plots/'
     filename= 'test3.png'
-    
-    # DIFFERENT FITNESS FUNCTIONS
-    fit = merit(problem, evaluate_zero)
-    
-    #best_ind, best_1, average_1 = sea_for_plot(number_of_generations, pop_size, number_of_items, prob_mutation, prob_crossover,tour_sel(tournament_size),one_point_cross,muta_bin, sel_survivors_elite(elite_percentage), fit)
-    
-    boa, best_average, average_bests_generation = run(seeds,numb_runs,number_of_generations,pop_size, number_of_items, prob_mutation, prob_crossover,tour_sel(tournament_size),one_point_cross,muta_bin, sel_survivors_elite(elite_percentage),fit);
 
-    #display(best_ind, phenotype)
-    display_stat_n(boa, best_average, path+filename)
-
-    print(max(boa))
+    test_data = read_test_file('/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/tests/test.csv')
+    #print(test_data)
     
-    #run(seeds,numb_runs,numb_generations,size_pop, size_cromo, prob_mut, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
+    output_file = '/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/results.txt'
+
+    for i in range(len(test_data)):
+
+        correlation = test_data[i][0]
+        max_value = test_data[i][1]
+        amplitude = test_data[i][2]
+        evaluation_func = test_data[i][3]
+        numb_runs = test_data[i][4]
+        number_of_generations = test_data[i][5]
+        pop_size = test_data[i][6]
+        number_of_items = test_data[i][7]
+        prob_mutation = test_data[i][8]
+        prob_crossover = test_data[i][9]
+        tournament_size = test_data[i][10]
+        type_crossover = test_data[i][11]
+        type_mutation = muta_bin
+        elite_percentage = test_data[i][13]
+        test_id = test_data[i][14]
+
+        if(correlation == 'uncorrelated'):
+            problem = generate_uncor(number_of_items,10)
+        if(correlation == 'weak'):
+                problem = generate_weak_cor(number_of_items,10, 5)
+        if(correlation == 'strong'):
+                problem = generate_strong_cor(number_of_items,10, 5)
+
+        if(evaluation_func == 'evaluate_zero'):
+            fit = merit(problem, evaluate_zero)
+        if(evaluation_func == 'evaluate_log'):
+            fit = merit(problem, evaluate_log)
+        if(evaluation_func == 'evaluate_linear'):
+            fit = merit(problem, evaluate_linear)
+        if(evaluation_func == 'evaluate_quadratic'):
+            fit = merit(problem, evaluate_quadratic)
+
+        if(type_crossover == 'uniform_crossover'):
+            type_crossover= uniform_cross
+        if(type_crossover == 'one_point_cross'):
+            type_crossover= one_point_cross
+        if(type_crossover == 'two_point_cross'):
+            type_crossover= two_point_cross
+
+        if(type_crossover == 'muta_bin'):
+            type_crossover= muta_bin
+        if(type_crossover == 'swap_mutation'):
+            type_crossover= swap_mutation
+
+        print(test_id)
+        #boa, best_average, average_bests_generation = run(seeds,numb_runs,number_of_generations,pop_size, number_of_items, prob_mutation, prob_crossover,tour_sel(tournament_size),type_crossover,type_mutation, sel_survivors_elite(elite_percentage),fit);
+        run_for_file(seeds,output_file,numb_runs,number_of_generations,pop_size, number_of_items, prob_mutation, prob_crossover,tour_sel(tournament_size),type_crossover,type_mutation,sel_survivors_elite(elite_percentage),fit,str(test_id))
+        
+        #display_stat_n(boa, best_average, path+filename)
+        #print(max(boa))
+
+    
     
 
 
