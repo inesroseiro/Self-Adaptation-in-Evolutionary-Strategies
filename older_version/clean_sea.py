@@ -251,3 +251,32 @@ def run_for_file (seeds,filename,numb_runs,numb_generations,size_pop, size_cromo
             f_out.write(str(best[1])+','+ test_id +'\n')
 
 
+ Arithmetic
+A crossover operator that linearly combines two parent chromosome vectors to produce two new offspring according to the following equations:
+
+Offspring1 = a * Parent1 + (1- a) * Parent2
+Offspring2 = (1 – a) * Parent1 + a * Parent2
+
+
+where a is a random weighting factor (chosen before each crossover operation).
+
+Consider the following 2 parents (each consisting of 4 float genes) which have been selected for crossover:
+
+Parent 1: (0.3)(1.4)(0.2)(7.4)
+Parent 2: (0.5)(4.5)(0.1)(5.6)
+
+If a = 0.7, the following two offspring would be produced:
+
+Offspring1: (0.36)(2.33)(0.17)(6.86)
+Offspring2: (0.402)(2.981)(0.149)(6.842)
+
+Heuristic
+A crossover operator that uses the fitness values of the two parent chromosomes to determine the direction of the search. The offspring are created according to the following equations:
+
+Offspring1 = BestParent + r * (BestParent – WorstParent)
+Offspring2 = BestParent
+
+
+where r is a random number between 0 and 1.
+
+It is possible that Offspring1 will not be feasible. This can happen if r is chosen such that one or more of its genes fall outside of the allowable upper or lower bounds. For this reason, heuristic crossover has a user settable parameter (n) for the number of times to try and find an r that results in a feasible chromosome. If a feasible chromosome is not produced after n tries, the WorstParent is returned as Offspring1.

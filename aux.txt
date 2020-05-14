@@ -1,0 +1,22 @@
+fitness_function:
+sphere [-5.12, 5.12]
+rosenbrock [-2.048, 2.048]
+step [-5.12, 5.12]
+quartic [-1.28; 1.28]
+rastrigin [-5.12, 5.12]
+schwefel [-500; 500]
+griewangk [-600; 600]
+
+domain:
+
+type_cross:
+a_crossover
+h_crossover
+
+type_mutation:
+muta_float_gaussian
+
+
+
+
+

@@ -1,0 +1,1 @@
+fitness_function,inferior_domain,superior_domain,number_runs,number_of_generations,pop_size,prob_mutation,prob_crossover,tournament_size,type_cross,alpha,type_mutation,elite_percentage,test_id
