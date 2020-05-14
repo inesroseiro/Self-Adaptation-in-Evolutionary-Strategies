@@ -21,36 +21,3 @@ swap_mutation
 
 
 
- correlation = 
-        max_value = 
-        amplitude = 
-        evaluation_func = test_data[i][3]
-        numb_runs = 
-        number_of_generations = 
-        pop_size = 
-        number_of_items = 
-        prob_mutation = 
-        prob_crossover = 
-        tournament_size = 
-        type_crossover = test_data[i][11]
-        type_mutation = 
-        elite_percentage =   
-
-
-
-
-        uncorrelated,10,5,evaluate_zero,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-weak,10,5,evaluate_zero,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-strong,10,5,evaluate_zero,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-uncorrelated,10,5,evaluate_log,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-weak,10,5,evaluate_log,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-strong,10,5,evaluate_log,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-uncorrelated,10,5,evaluate_linear,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-weak,10,5,evaluate_linear,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-strong,10,5,evaluate_linear,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-uncorrelated,10,5,evaluate_quadratic,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-weak,10,5,evaluate_quadratic,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-strong,10,5,evaluate_quadratic,30,100,100,10,0.05,0.4,4,uniform_crossover,muta_bin,0.05
-uncorrelated,10,5,evaluate_zero,30,100,100,10,0.05,0.4,4,two_points_cross,muta_bin,0.05
-weak,10,5,evaluate_zero,30,100,100,10,0.05,0.4,4,two_points_cross,muta_bin,0.05
-strong,10,5,evaluate_zero,30,100,100,10,0.05,0.4,4,two_points_cross,muta_bin,0.05

@@ -197,7 +197,7 @@ if __name__ == '__main__':
     test_data = read_test_file('/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/tests/test.csv')
     #print(test_data)
     
-    output_file = '/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/results.txt'
+    output_file = '/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/results2.txt'
 
     for i in range(len(test_data)):
 
@@ -237,8 +237,8 @@ if __name__ == '__main__':
             type_crossover= uniform_cross
         if(type_crossover == 'one_point_cross'):
             type_crossover= one_point_cross
-        if(type_crossover == 'two_point_cross'):
-            type_crossover= two_point_cross
+        if(type_crossover == 'two_points_cross'):
+            type_crossover= two_points_cross
 
         if(type_crossover == 'muta_bin'):
             type_crossover= muta_bin
