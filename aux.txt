@@ -7,8 +7,6 @@ rastrigin [-5.12, 5.12]
 schwefel [-500; 500]
 griewangk [-600; 600]
 
-domain:
-
 type_cross:
 a_crossover
 h_crossover

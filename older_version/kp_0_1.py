@@ -252,6 +252,14 @@ if __name__ == '__main__':
         #display_stat_n(boa, best_average, path+filename)
         #print(max(boa))
 
+       #run(seeds,numb_runs,numb_generations,size_pop, domain, prob_mut, sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
+        if(type_cross == 'a_crossover'):  
+            boa,best_average, average_bests_gen = run(seeds,number_runs,number_of_generations,pop_size,domain,prob_mutation,sigma,prob_crossover,tournament_selection(tournament_size),a_crossover(0.1),muta_float_gaussian,sel_survivors_elite(0.1), sphere)
+
+        if(type_cross == 'h_crossover'):
+            boa,best_average, average_bests_gen = run(seeds,number_runs,number_of_generations,pop_size,domain,prob_mutation,sigma,prob_crossover,tournament_selection(tournament_size),a_crossover(alpha),type_mutation,sel_survivors_elite(elite_percentage), fitness_function)
+            #boa,best_average, average_bests_gen = run(seeds,number_runs,number_of_generations,pop_size,domain,prob_mutation,sigma,prob_crossover,tournament_selection(tournament_size),h_crossover(alpha,domain),type_mutation,sel_survivors_elite(elite_percentage), fitness_function)
+
     
     
 

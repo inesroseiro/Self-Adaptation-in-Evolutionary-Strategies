@@ -98,7 +98,6 @@ def constraint_domain(value, domain):
             return domain[1] 
     return value
 
-
 # TOURNAMENT - Selection
 def tournament_selection(tourn_size):
     def tournament(pop):
@@ -141,34 +140,6 @@ def best_pop(populacao):
 
 def average_pop(populacao):
     return sum([fit for cromo,fit in populacao])/len(populacao)
-
-# ----------------------------------------- Statistics ----------------------------------------- 
-
-
-def run(seeds,numb_runs,numb_generations,size_pop, domain, prob_mut, sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func):
-    statistics = []
-    best_generations = []
-
-    for i in range(numb_runs):
-        seed(seeds[i])
-        best,stat_best,stat_aver = sea_for_plot(numb_generations,size_pop, domain, prob_mut, sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
-        statistics.append(stat_best)
-    stat_gener = list(zip(*statistics))
-    boa = [min(g_i) for g_i in stat_gener] # minimization
-    aver_gener =  [sum(g_i)/len(g_i) for g_i in stat_gener]
-    for g_i in stat_gener:
-        best_generations.append(min(g_i))
-    
-    average_best_gen = sum(best_generations)/len(best_generations)
-    return boa,aver_gener,average_best_gen
-    
-def run_for_file(seeds,filename,numb_runs,numb_generations,size_pop, domain,prob_mut, sigma,prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func):
-    with open(filename,'w') as f_out:
-        for i in range(numb_runs):
-            seed(seeds[i])
-            best= sea_float(numb_generations,size_pop, domain, prob_mut,sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
-            f_out.write(str(best[1])+'\n')
-
 
 # ----------------------------------------- Simple Ev Algorithms ----------------------------------------- 
 # Simple [Float] Evolutionary Algorithm		
@@ -235,3 +206,30 @@ def sea_for_plot(numb_generations,size_pop, domain, prob_mut,sigma,prob_cross,se
         stat_aver.append(average_pop(populacao))
 	
     return best_pop(populacao),stat, stat_aver
+
+
+# ----------------------------------------- Statistics ----------------------------------------- 
+def run(seeds,numb_runs,numb_generations,size_pop, domain, prob_mut, sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func):
+    statistics = []
+    best_generations = []
+
+    for i in range(numb_runs):
+        seed(seeds[i])
+        best,stat_best,stat_aver = sea_for_plot(numb_generations,size_pop, domain, prob_mut, sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
+        statistics.append(stat_best)
+    stat_gener = list(zip(*statistics))
+    boa = [min(g_i) for g_i in stat_gener] # minimization
+    aver_gener =  [sum(g_i)/len(g_i) for g_i in stat_gener]
+    for g_i in stat_gener:
+        best_generations.append(min(g_i))
+    
+    average_best_gen = sum(best_generations)/len(best_generations)
+    return boa,aver_gener,average_best_gen
+    
+def run_for_file(seeds,filename,numb_runs,numb_generations,size_pop, domain,prob_mut, sigma,prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func,test_id):
+    with open(filename,'a') as f_out:
+        for i in range(numb_runs):
+            seed(seeds[i])
+            best= sea_float(numb_generations,size_pop, domain, prob_mut,sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
+            f_out.write(str(best[1])+','+ test_id +'\n')
+

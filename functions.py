@@ -45,8 +45,9 @@ def rosenbrock(indiv):
 	domain: [-2.048, 2.048] for each dimension.
 	min = 0 at x = (0,0,...,0)
 	"""
+	soma = 0
 	for i in range(len(indiv)-1):
-		soma+= (1-indiv[i])**2 + 100*(indiv[i+1]-(individ[i])**2)**2
+		soma+= (1-indiv[i])**2 + 100*(indiv[i+1]-(indiv[i])**2)**2
 	return soma
 
 def step(indiv):
@@ -58,7 +59,7 @@ def step(indiv):
 	soma=0
 	tamanho = len(indiv)
 	for i in range(len(indiv)):
-		soma+= math.abs(indiv[i])
+		soma+= math.fabs(indiv[i])
 
 	return 6*tamanho +soma
 
@@ -102,11 +103,8 @@ def griewangk(indiv):
 	p2 = 1
 	for i in range(len(indiv)):
 		p1 += (indiv[i])**2
-		p2 *= np.cos(indiv[i] / math.sqrt(i))
-	return 1 + (p1+p2)/400
-
-
-
+		p2 *= np.cos(indiv[i] / math.sqrt(i+1))
+	return 1 + p1/4000 + p2
 
 
 def get_params(func, size_cromo):
@@ -125,27 +123,33 @@ def get_params(func, size_cromo):
 		amp_sigma = (domain[0][1]-domain[0][0])/100
 		sigma = [round(random.uniform(0,amp_sigma),2)  for i in range(size_cromo)]
 		return domain, sigma, merito_s
+	elif(func=='sphere'):
+		domain = [[-5.12,5.12]]*size_cromo
+		amp_sigma = (domain[0][1]-domain[0][0])/10
+		sigma = [round(random.uniform(0,amp_sigma),2)  for i in range(size_cromo)]
+		return domain, sigma, merito_sphere
+	elif(func=='rosenbrock'):
+		domain = [[-5.12,5.12]]*size_cromo
+		amp_sigma = (domain[0][1]-domain[0][0])/10
+		sigma = [round(random.uniform(0,amp_sigma),2)  for i in range(size_cromo)]
+		return domain, sigma, merito_rosenbrock
+	elif(func=='step'):
+		domain = [[-5.12,5.12]]*size_cromo
+		amp_sigma = (domain[0][1]-domain[0][0])/10
+		sigma = [round(random.uniform(0,amp_sigma),2)  for i in range(size_cromo)]
+		return domain, sigma, merito_step
+	elif(func=='griewangk'):
+		domain = [[-600,600]]*size_cromo
+		amp_sigma = (domain[0][1]-domain[0][0])/10
+		sigma = [round(random.uniform(0,amp_sigma),2)  for i in range(size_cromo)]
+		return domain, sigma, merito_griewangk
 	else:
 		print('Error: unrecognized benchmark function <'+func+'>')
 		exit()
     
     
 if __name__ == '__main__':
-
-
-	seeds = [2741, 8417, 5530, 4001, 1074, 828, 3878, 1652, 800, 1471, 3092, 2848, 6462, 7056, 7047, 4256, 4037, 6854, 918, 4042, 4333, 9051, 9126, 4210, 9385, 9860, 7732, 9063, 2044, 9998]
-	size_cromo = 5
-	path = '/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/plots/'
-	plot_name = 'test2.png'
-	#domain, sigma, fitness_func = get_params('quartic', size_cromo)
-	#domain, sigma, fitness_func = get_params('rastrigin', size_cromo)
-	domain, sigma, fitness_func = get_params('schwefel', size_cromo)
-
-	boa,best_average, average_bests_gen = run(seeds,10,250,100,domain,0.01,sigma,0.9,tournament_selection(3),h_crossover(0.3,domain),muta_float_gaussian,sel_survivors_elite(0.1), fitness_func)
-
-	display_stat_n(boa,best_average,path+plot_name)
-
-	print(min(boa))
+	pass
 	
 
 	    
