@@ -1,9 +1,2 @@
 fitness_function,number_runs,number_of_generations,pop_size,prob_mutation,prob_crossover,tournament_size,type_cross,alpha,type_mutation,elite_percentage,test_id,type_algorithm,size_cromo
-sphere,30,100,100,0.05,0.4,3,h_crossover,0.3,muta_float_gaussian,0.1,1,standart,5
-sphere,30,100,100,0.05,0.4,3,a_crossover,0.3,muta_float_gaussian,0.1,2,standart,5
-rosenbrock,30,100,100,0.05,0.4,3,a_crossover,0.3,muta_float_gaussian,0.1,3,standart,5
-step,30,100,100,0.05,0.4,3,a_crossover,0.3,muta_float_gaussian,0.1,4,standart,5
-quartic,30,100,100,0.05,0.4,3,a_crossover,0.3,muta_float_gaussian,0.1,5,standart,5
-rastrigin,30,100,100,0.05,0.4,3,a_crossover,0.3,muta_float_gaussian,0.1,6,standart,5
-schwefel,30,100,100,0.05,0.4,3,a_crossover,0.3,muta_float_gaussian,0.1,7,standart,5
-griewangk,30,100,100,0.05,0.4,3,a_crossover,0.3,muta_float_gaussian,0.1,8,standart,5
+rastrigin,30,10,100,0.05,0.9,5,a_crossover,0.3,muta_float_gaussian,0.1,2,standart,100

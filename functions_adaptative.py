@@ -3,8 +3,9 @@ __date__ = 'March 2018'
 
 import math
 from utils import *
-from sea_float_clean import *
+from adaptative_sea_float_clean import *
 import random
+
 
 # Fitness
 def merito_sphere(indiv):
@@ -29,9 +30,9 @@ def merito_griewangk(indiv):
 	return griewangk(fenotipo(indiv))
 
 def fenotipo(indiv):
-    return indiv   
+    return indiv[0]  
 
-def sphere(indiv):
+def sphere_adap(indiv):
     """ De Jong F1 or the sphere function
 	domain: [-5.12, 5.12] for each dimension.
 	min = 0 at x = (0,0,...,0)
@@ -64,13 +65,13 @@ def step(indiv):
 	return 6*tamanho +soma
 
 def quartic(indiv):
-    """
-    quartic = DeJong 4
-    domain = [-1.28; 1.28]
-    minimum 0 at x = 0
-    """
-    y = sum([ (i+1) * x for i,x in enumerate(indiv)]) + random.uniform(0,1)
-    return y
+	"""
+	quartic = DeJong 4
+	domain = [-1.28; 1.28]
+	minimum 0 at x = 0
+	"""
+	y = sum([ (i+1) * x for i,x in enumerate(indiv)]) + random.uniform(0,1)
+	return y
 
 def rastrigin(indiv):
     """
