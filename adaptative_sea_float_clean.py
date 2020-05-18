@@ -120,6 +120,13 @@ def h_crossover(alpha, domain):
 
     return heuristic_crossover
 
+def constraint_domain(value, domain):
+    if value < domain[0]:
+            return domain[0]
+    if value > domain[1]:
+            return domain[1]
+    return value
+
 
 # TOURNAMENT - Selection
 def tournament_selection(tourn_size):
@@ -162,7 +169,6 @@ def best_pop(populacao):
     # minimization
     pop_size = len(populacao)
     populacao.sort(key=itemgetter(1))
-    print(populacao[0])
     return populacao[0]
 
 

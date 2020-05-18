@@ -1,2 +1,2 @@
 fitness_function,number_runs,number_of_generations,pop_size,prob_mutation,prob_crossover,tournament_size,type_cross,alpha,type_mutation,elite_percentage,test_id,type_algorithm,size_cromo
-rastrigin,30,10,100,0.05,0.9,5,a_crossover,0.3,muta_float_gaussian,0.1,2,standart,100
+griewangk,30,30,30,0.1,0.8,10,a_crossover,0.3,muta_float_gaussian,0.1,2,standart,5

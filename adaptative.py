@@ -50,13 +50,14 @@ def read_test_file(test_file):
 if __name__ == '__main__':
     seeds = [2741, 8417, 5530, 4001, 1074, 828, 3878, 1652, 800, 1471, 3092, 2848, 6462, 7056, 7047, 4256, 4037, 6854, 918, 4042, 4333, 9051, 9126, 4210, 9385, 9860, 7732, 9063, 2044, 9998]
 
-    path = '/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/plots/'
+    path = 'plots/'
     plot_name = 'test2.png'
-    test_data = read_test_file('/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/test.csv')
-    filename ='/Users/iroseiro/Desktop/CE_TP6/Self-Adaptation-in-Evolutionary-Strategies/standart_results.txt'
+    test_data = read_test_file('test.csv')
+    filename ='standart_results.txt'
     #print(test_data)
     for i in range(len(test_data)):
         fitness_function= test_data[i][0]
+        print(fitness_function)
         number_runs= test_data[i][1]
         number_of_generations= test_data[i][2]
         pop_size= test_data[i][3]
@@ -86,6 +87,4 @@ if __name__ == '__main__':
             
 
         display_stat_n(boa,best_average,path+plot_name)
-        #print(boa)
-        #print(min(boa))
-	
+        print(min(boa))

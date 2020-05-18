@@ -32,7 +32,7 @@ def merito_griewangk(indiv):
 def fenotipo(indiv):
     return indiv[0]  
 
-def sphere_adap(indiv):
+def sphere(indiv):
     """ De Jong F1 or the sphere function
 	domain: [-5.12, 5.12] for each dimension.
 	min = 0 at x = (0,0,...,0)
@@ -55,13 +55,12 @@ def step(indiv):
 	""" 
 	De Jong F3 or the step function
 	domain: [-5.12, 5.12] for each dimension.
-	min = 0 at x = (0,0,...,0)
+	min = 0 at x = (-5.12,-5.12,...,-5.12)
 	"""
 	soma=0
 	tamanho = len(indiv)
 	for i in range(len(indiv)):
-		soma+= math.fabs(indiv[i])
-
+		soma += math.fabs(indiv[i])
 	return 6*tamanho +soma
 
 def quartic(indiv):
@@ -70,7 +69,7 @@ def quartic(indiv):
 	domain = [-1.28; 1.28]
 	minimum 0 at x = 0
 	"""
-	y = sum([ (i+1) * x for i,x in enumerate(indiv)]) + random.uniform(0,1)
+	y = sum([ (i+1) * x**4 for i,x in enumerate(indiv)]) + random.uniform(0,1)
 	return y
 
 def rastrigin(indiv):
