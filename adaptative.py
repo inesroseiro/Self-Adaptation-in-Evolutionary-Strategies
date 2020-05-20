@@ -77,8 +77,8 @@ if __name__ == '__main__':
 
         #run(seeds,numb_runs,numb_generations,size_pop, domain, prob_mut, sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
         if(type_cross == 'a_crossover'):  
-            boa,best_average, average_bests_gen = run_adaptive(seeds,number_runs,number_of_generations,pop_size,domain,prob_mutation,sigma,prob_crossover,tournament_selection(tournament_size),a_crossover(alpha),muta_float_gaussian,sel_survivors_elite(elite_percentage), fitness_func)
-            #run_for_file(seeds,filename,number_runs,number_of_generations,pop_size,domain,prob_mutation, sigma,prob_crossover,tournament_selection(tournament_size),a_crossover(alpha),muta_float_gaussian,sel_survivors_elite(elite_percentage),fitness_func,test_id)
+            #boa,best_average, average_bests_gen = run_adaptive(seeds,number_runs,number_of_generations,pop_size,domain,prob_mutation,sigma,prob_crossover,tournament_selection(tournament_size),a_crossover(alpha),muta_float_gaussian,sel_survivors_elite(elite_percentage), fitness_func)
+            run_for_file(seeds,filename,number_runs,number_of_generations,pop_size,domain,prob_mutation, sigma,prob_crossover,tournament_selection(tournament_size),a_crossover(alpha),muta_float_gaussian,sel_survivors_elite(elite_percentage),fitness_func,test_id)
 
         if(type_cross == 'h_crossover'):
             run_for_file(seeds,filename,number_runs,number_of_generations,pop_size,domain,prob_mutation, sigma,prob_crossover,tournament_selection(tournament_size),h_crossover(alpha,domain),muta_float_gaussian,sel_survivors_elite(elite_percentage),fitness_func,test_id)
@@ -86,5 +86,5 @@ if __name__ == '__main__':
 
             
 
-        display_stat_n(boa,best_average,path+plot_name)
-        print(min(boa))
+        #display_stat_n(boa,best_average,path+plot_name)
+        #print(min(boa))
