@@ -54,13 +54,12 @@ def step(indiv):
 	""" 
 	De Jong F3 or the step function
 	domain: [-5.12, 5.12] for each dimension.
-	min = 0 at x = (0,0,...,0)
+	min = 0 at x = (-5.12,-5.12,...,-5.12)
 	"""
 	soma=0
 	tamanho = len(indiv)
 	for i in range(len(indiv)):
-		soma+= math.fabs(indiv[i])
-
+		soma += math.floor(indiv[i])
 	return 6*tamanho +soma
 
 def quartic(indiv):
@@ -83,15 +82,16 @@ def rastrigin(indiv):
     return A * n + sum([x**2 - A * math.cos(2 * math.pi * x) for x in indiv])
 
 def schwefel(indiv):    
-    """
-    schwefel function
-    domain = [-500; 500]
-    minimum at (420.9687,...,420.9687)
-    """
-    y = sum([-x * math.sin(math.sqrt(math.fabs(x))) for x in indiv])
-    return y
+	"""
+	schwefel function
+	domain = [-500; 500]
+	minimum at (420.9687,...,420.9687)
+	"""
 
+	tamanho = len(indiv)
 
+	y = 418.9829 * tamanho - sum([-x * math.sin(math.sqrt(math.fabs(x))) for x in indiv])
+	return y
 # based on https://www.cs.unm.edu/~neal.holts/dga/benchmarkFunction/griewank.html
 def griewangk(indiv):
 	"""
