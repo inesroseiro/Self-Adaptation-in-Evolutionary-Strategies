@@ -82,7 +82,7 @@ def h_crossover(alpha,domain):
             f2 = [None] * size
             for i in range(size):
                 f1[i] = alpha * (worst_cromo[i] - best_cromo[i]) + best_cromo[i]
-                f2[i] = best_cromo[i]
+                f2[i] = alpha * (best_cromo[i]- worst_cromo[i]) + best_cromo[i]
             
                 f1[i] = constraint_domain(f1[i], domain[i])
                 f2[i] = constraint_domain(f2[i], domain[i])
@@ -90,7 +90,7 @@ def h_crossover(alpha,domain):
             return ((f1,0),(f2,0))
         return indiv_1, indiv_2
     return heuristic_crossover
-       
+
 def constraint_domain(value, domain):
     if value < domain[0]:
             return domain[0] 

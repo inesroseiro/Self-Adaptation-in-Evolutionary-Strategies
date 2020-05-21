@@ -95,29 +95,39 @@ def a_crossover(alpha):
 # based on: http://www.neurodimension.com/genetic/crossover.html
 def h_crossover(alpha, domain):
     def heuristic_crossover(indiv_1, indiv_2, prob_cross):
-        size = len(indiv_1[0])
+        size = len(indiv_1[0][0])
 
         if random() < prob_cross:
+            cromo_1 = indiv_1[0][0]
+            cromo_2 = indiv_2[0][0]
+            sigma_1 = indiv_1[0][1]
+            sigma_2 = indiv_2[0][1]
 
-            if indiv_2[1] < indiv_1[1]:
-                best_cromo = indiv_1[0]
-                worst_cromo = indiv_2[0]
+            if cromo_1 < cromo_2:
+                best_cromo = cromo_1
+                worst_cromo = cromo_2
+                
+                best_sigma = sigma_1
+                worst_sigma= sigma_2
             else:
-                best_cromo = indiv_2[0]
-                worst_cromo = indiv_1[0]
+                best_cromo = cromo_2
+                worst_cromo = cromo_1
 
-            f1 = [None] * size
-            f2 = [None] * size
+                best_sigma = sigma_2
+                worst_sigma= sigma_1
+
+            f1 = [[None] * size,[None] * size]
+            f2 = [[None] * size,[None] * size]
+
             for i in range(size):
-                f1[i] = alpha * (worst_cromo[i] - best_cromo[i]) + best_cromo[i]
-                f2[i] = best_cromo[i]
-
-                f1[i] = constraint_domain(f1[i], domain[i])
-                f2[i] = constraint_domain(f2[i], domain[i])
-
+                f1[0][i] = alpha * (worst_cromo[i] - best_cromo[i]) + best_cromo[i]
+                f2[0][i] = alpha * (best_cromo[i]- worst_cromo[i]) + best_cromo[i]
+                
+                f1[1][i] = alpha * (worst_sigma[i] - best_sigma[i]) + best_sigma[i]
+                f2[1][i] = alpha * (worst_sigma[i]- worst_sigma[i]) + best_sigma[i]
+                    
             return ((f1, 0), (f2, 0))
         return indiv_1, indiv_2
-
     return heuristic_crossover
 
 def constraint_domain(value, domain):
@@ -207,15 +217,12 @@ def run_adaptive(seeds, numb_runs, numb_generations, size_pop, domain, prob_mut,
     average_best_gen = sum(best_generations) / len(best_generations)
     return boa, aver_gener, average_best_gen
 
-
-def run_for_file(seeds, filename, numb_runs, numb_generations, size_pop, domain, prob_mut, sigma, prob_cross,
-                 sel_parents, recombination, mutation, sel_survivors, fitness_func):
-    with open(filename, 'w') as f_out:
+def run_for_file(seeds,filename,numb_runs,numb_generations,size_pop, domain,prob_mut, sigma,prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func,test_id):
+    with open(filename,'a') as f_out:
         for i in range(numb_runs):
             seed(seeds[i])
-            best = sea_float(numb_generations, size_pop, domain, prob_mut, sigma, prob_cross, sel_parents,
-                             recombination, mutation, sel_survivors, fitness_func)
-            f_out.write(str(best[1]) + '\n')
+            best= sea_float(numb_generations,size_pop, domain, prob_mut,sigma, prob_cross,sel_parents,recombination,mutation,sel_survivors, fitness_func)
+            f_out.write(str(best[1])+','+ test_id +'\n')
 
 
 # ----------------------------------------- Simple Ev Algorithms -----------------------------------------
