@@ -178,6 +178,13 @@ def average_pop(populacao):
 
 # ----------------------------------------- Statistics -----------------------------------------
 
+def stats_to_file(best, stat_best, stat_aver,fitnessfunc,run_numb):
+    filename = fitnessfunc.__name__+'_results.txt'
+    with open(filename,'a') as f:
+        f.write(str(run_numb)+'\n')
+        f.write(str(stat_best)+'\n')
+        f.write(str(stat_aver)+'\n')
+        f.write(str(best)+'\n')
 
 def run_adaptive(seeds, numb_runs, numb_generations, size_pop, domain, prob_mut, sigma, prob_cross, sel_parents, recombination,
         mutation, sel_survivors, fitness_func):
@@ -188,6 +195,8 @@ def run_adaptive(seeds, numb_runs, numb_generations, size_pop, domain, prob_mut,
         seed(seeds[i])
         best, stat_best, stat_aver = sea_for_plot(numb_generations, size_pop, domain, prob_mut, sigma, prob_cross,
                                                   sel_parents, recombination, mutation, sel_survivors, fitness_func)
+        #SAVE STATS TO FILE
+        stats_to_file(best,stat_best,stat_aver,fitness_func,i)
         statistics.append(stat_best)
     stat_gener = list(zip(*statistics))
     boa = [min(g_i) for g_i in stat_gener]  # minimization
