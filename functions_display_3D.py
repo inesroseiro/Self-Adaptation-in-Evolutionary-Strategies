@@ -73,7 +73,24 @@ def de_jong_f3():
     ax.plot_surface(X, Y, Z, rstride=1,cstride=1,cmap=cm.jet)
     ax.legend()
     plt.savefig('quartic.png', bbox_inches='tight')
-    
+
+
+def de_jong_f4():
+    fig = plt.figure()
+    fig.suptitle('Step', fontsize=18, fontweight='bold', color='red')
+    ax = Axes3D(fig)
+
+    X = np.arange(-5.12, 5.12, 0.1)
+    Y = np.arange(-5.12, 5.12, 0.1)
+
+    X, Y = np.meshgrid(X, Y)
+    Z = 6*2 + (np.floor(X)+np.floor(Y))
+    print(Z)
+    ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.jet)
+    ax.legend()
+    plt.savefig('step.png', bbox_inches='tight')
+
+
 def schewefel():
     fig = plt.figure()
     fig.suptitle('Schewefel', fontsize=18, fontweight='bold')
@@ -103,7 +120,6 @@ def griegwang():
     X, Y = np.meshgrid(X, Y)
     
     Z = 1 + (1.0/4000)* (X**2 + Y**2) + np.cos(X) * np.cos(Y/np.sqrt(2.0))
-    
     ax.plot_surface(X, Y, Z, rstride=1,cstride=1,cmap=cm.jet)
     ax.legend()
     plt.savefig('griegwangk.png', bbox_inches='tight')
@@ -138,13 +154,14 @@ def shubert_2D(X,Y):
 
 
 if __name__ == '__main__':
-    de_jong_f1()
-    de_jong_f2()
-    de_jong_f3()
-    rastrigin()
-    schewefel()
+    # de_jong_f1()
+    # de_jong_f2()
+    # de_jong_f3()
+    # rastrigin()
+    # schewefel()
+    # de_jong_f4()
     griegwang()
-    schubert()
+    #schubert()
 
     
     
